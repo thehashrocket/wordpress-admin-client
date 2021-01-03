@@ -8,6 +8,7 @@ import {
   cilSun,
   cilMoon,
   cilHome,
+  cilDoor,
   cilPeople
 } from '@coreui/icons'
 
@@ -18,6 +19,7 @@ export const icons = Object.assign({}, {
 }, {
   cilApplicationsSettings,
   cilSpeedometer,
+  cilDoor,
   cilSun,
   cilMoon,
   cilHome,

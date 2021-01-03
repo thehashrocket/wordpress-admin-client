@@ -4,7 +4,20 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+  split
+} from '@apollo/client';
+import { gql } from '@apollo/client';
 import './scss/style.scss';
+
+const client = new ApolloClient({
+  uri: 'http://172.17.227.70:4000/graphql',
+  cache: new InMemoryCache()
+});
 
 const loading = (
   <div className="pt-3 text-center">
@@ -18,9 +31,11 @@ export default function WordpressAdmin() {
   return (
     <Router>
       <React.Suspense fallback={loading}>
-        <Switch>
-          <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
-        </Switch>
+        <ApolloProvider client={client}>
+          <Switch>
+            <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+          </Switch>
+        </ApolloProvider>
       </React.Suspense>
     </Router>
   );

@@ -13,6 +13,12 @@ const _nav = [
   },
   {
     _tag: 'CSidebarNavItem',
+    name: 'Login',
+    to: '/login',
+    icon: 'cil-door',
+  },
+  {
+    _tag: 'CSidebarNavItem',
     name: 'Dashboard',
     to: '/dashboard',
     icon: 'cil-speedometer',
