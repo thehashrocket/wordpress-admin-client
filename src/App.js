@@ -11,6 +11,7 @@ import {
   InMemoryCache,
   split
 } from '@apollo/client';
+
 import { gql } from '@apollo/client';
 import './scss/style.scss';
 
@@ -33,7 +34,7 @@ export default function WordpressAdmin() {
       <React.Suspense fallback={loading}>
         <ApolloProvider client={client}>
           <Switch>
-            <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+            <Route path="/" name="Home" render={props => <TheLayout {...props} />} />
           </Switch>
         </ApolloProvider>
       </React.Suspense>
