@@ -39,10 +39,13 @@ const Login = () => {
     name: ''
   });
 
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password
+    },
+    onError: (error) => {
+      console.log(error)
     },
     onCompleted: ({ login }) => {
       localStorage.setItem(AUTH_TOKEN, login.token);

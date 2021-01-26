@@ -3,6 +3,8 @@ import 'react-app-polyfill/stable';
 import 'core-js';
 import './polyfill'
 
+import 'react-notifications/lib/notifications.css'; // React Notifications
+import { NotificationContainer, NotificationManager } from 'react-notifications'; // React Notifications
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
