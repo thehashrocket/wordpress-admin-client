@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../../constants';
+import useToken from '../../components/App/useToken';
+
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -38,29 +41,39 @@ const Login = () => {
     password: '',
     name: ''
   });
+  const { token, setToken } = useToken();
 
-  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [login, { loginData, loginLoading, loginError }] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password
     },
-    onError: (error) => {
-      console.log(error)
+    onError: (loginError) => {
+      console.log('here? ')
+      NotificationManager.error(loginError.graphQLErrors[0].message, 'Error!', 5000)
     },
     onCompleted: ({ login }) => {
-      localStorage.setItem(AUTH_TOKEN, login.token);
+      console.log('maybe hbere')
+      // NotificationManager.success('Login Successful', 'Success!', 5000);
+      // localStorage.setItem(AUTH_TOKEN, login.token);
+      setToken(login.token)
       history.push('/');
     }
   });
 
-  const [signup] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { signupData, signupLoading, signupError }] = useMutation(SIGNUP_MUTATION, {
     variables: {
       name: formState.name,
       email: formState.email,
       password: formState.password
     },
+    onError: (signupError) => {
+      NotificationManager.error(signupError.graphQLErrors[0].message, 'Error!', 5000)
+    },
     onCompleted: ({ signup }) => {
-      localStorage.setItem(AUTH_TOKEN, signup.token);
+      NotificationManager.success('Account created', 'Success!', 5000);
+      // localStorage.setItem(AUTH_TOKEN, signup.token);
+      setToken(signup.token)
       history.push('/');
     }
   });
@@ -125,6 +138,7 @@ const Login = () => {
             : 'already have an account?'}
         </button>
       </div>
+      <NotificationContainer />
     </div>
   );
 };

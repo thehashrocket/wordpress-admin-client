@@ -7,16 +7,13 @@ import {
 import {
   ApolloClient,
   ApolloProvider,
-  createHttpLink,
   InMemoryCache,
-  split
 } from '@apollo/client';
 
-import { gql } from '@apollo/client';
 import './scss/style.scss';
 
 const client = new ApolloClient({
-  uri: 'http://172.17.227.70:4000/graphql',
+  uri: 'http://172.27.205.178:4000/graphql',
   cache: new InMemoryCache()
 });
 
@@ -28,7 +25,9 @@ const loading = (
 
 const TheLayout = React.lazy(() => import('./containers/TheLayout'));
 
+
 export default function WordpressAdmin() {
+
   return (
     <Router>
       <React.Suspense fallback={loading}>
